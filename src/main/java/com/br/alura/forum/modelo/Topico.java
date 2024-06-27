@@ -1,5 +1,6 @@
 package com.br.alura.forum.modelo;
 
+
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -22,8 +23,12 @@ public class Topico {
 
 	@ManyToOne
 	private Curso curso;
+
 	@OneToMany(mappedBy = "topico")
 	private List<Resposta> respostas = new ArrayList<>();
+
+	public Topico() {
+	}
 
 	public Topico(String titulo, String mensagem, Curso curso) {
 		this.titulo = titulo;
@@ -32,7 +37,6 @@ public class Topico {
 	}
 
 	// Getters e Setters
-
 	public Long getId() {
 		return id;
 	}
@@ -127,5 +131,4 @@ public class Topico {
 		return "Topico [id=" + id + ", titulo=" + titulo + ", mensagem=" + mensagem + ", dataCriacao=" + dataCriacao
 				+ ", status=" + status + ", autor=" + autor + ", curso=" + curso + ", respostas=" + respostas + "]";
 	}
-
 }

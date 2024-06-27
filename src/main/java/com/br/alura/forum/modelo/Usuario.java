@@ -1,5 +1,6 @@
 package com.br.alura.forum.modelo;
 
+
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -21,8 +22,10 @@ public class Usuario {
 	@OneToMany(mappedBy = "autor")
 	private List<Resposta> respostas = new ArrayList<>();
 
-	// Getters e Setters
+	public Usuario() {
+	}
 
+	// Getters e Setters
 	public Long getId() {
 		return id;
 	}
@@ -101,5 +104,4 @@ public class Usuario {
 		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + ", topicosCriados="
 				+ topicosCriados + ", respostas=" + respostas + "]";
 	}
-
 }

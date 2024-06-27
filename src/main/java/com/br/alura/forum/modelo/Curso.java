@@ -1,5 +1,6 @@
 package com.br.alura.forum.modelo;
 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,12 +15,38 @@ public class Curso {
 	private String nome;
 	private String categoria;
 
+	public Curso() {
+	}
+
 	public Curso(String nome, String categoria) {
 		this.nome = nome;
 		this.categoria = categoria;
 	}
 
-	// getters e setters omitidos para brevidade
+	// Getters e Setters
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
+	}
 
 	@Override
 	public int hashCode() {
@@ -45,5 +72,4 @@ public class Curso {
 			return false;
 		return true;
 	}
-
 }

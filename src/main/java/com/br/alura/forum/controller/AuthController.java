@@ -1,27 +1,31 @@
 package com.br.alura.forum.controller;
 
-import com.br.alura.forum.security.AuthenticationService;
 import com.br.alura.forum.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class AuthenticationController {
+@RequestMapping("/auth")
+public class AuthController {
 
     @Autowired
-    private AuthenticationService authenticationService;
+    private AuthenticationManager authenticationManager;
 
     @Autowired
-    private JwtTokenProvider tokenProvider;
+    private JwtTokenProvider jwtTokenProvider;
 
-    @PostMapping("/authenticate")
-    public String authenticate(@RequestBody AuthRequest authRequest) {
-        if (authenticationService.authenticate(authRequest.getUsername(), authRequest.getPassword())) {
-            return tokenProvider.generateToken(authRequest.getUsername());
-        } else {
-            throw new RuntimeException("Invalid credentials");
+    @PostMapping("/login")
+    public String login(@RequestParam String username, @RequestParam String password) {
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(username, password));
+            return jwtTokenProvider.createToken(authentication.getName());
+        } catch (AuthenticationException e) {
+            throw new RuntimeException("Invalid login credentials");
         }
     }
 }

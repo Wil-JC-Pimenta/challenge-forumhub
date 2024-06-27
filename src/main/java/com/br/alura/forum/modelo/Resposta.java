@@ -14,14 +14,15 @@ public class Resposta {
 
 	@ManyToOne
 	private Topico topico;
+
 	private LocalDateTime dataCriacao = LocalDateTime.now();
 
 	@ManyToOne
 	private Usuario autor;
+
 	private Boolean solucao = false;
 
 	// Getters e Setters
-
 	public Long getId() {
 		return id;
 	}
@@ -100,5 +101,4 @@ public class Resposta {
 		return "Resposta [id=" + id + ", mensagem=" + mensagem + ", topico=" + topico + ", dataCriacao=" + dataCriacao
 				+ ", autor=" + autor + ", solucao=" + solucao + "]";
 	}
-
 }
